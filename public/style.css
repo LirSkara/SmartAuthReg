@@ -1,0 +1,10 @@
+.btn-eye {
+    position:absolute;
+    z-index: 1000;
+    top: 7px;
+    right: 5px;
+    border-radius: 50%;
+}
+.btn-eye:hover {
+    background-color: rgba(97, 97, 247, 0.10);
+}

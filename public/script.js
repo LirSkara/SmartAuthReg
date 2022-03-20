@@ -80,35 +80,43 @@ document.addEventListener("DOMContentLoaded", function() {
 function check(){
     var tel = document.getElementById('tel').value
     if(tel != ''){
-        $.ajax({
-            url: `/check_tel/${tel}`,
-            method: 'get',
-            dataType: 'html',
-            success: function(data){
-                document.getElementById('bar').innerHTML = '<i class="bi bi-arrow-left-short"></i> '+tel
-                document.getElementById('bar').style = 'display:block;'
-                if(data == 1){
-                    document.getElementById('header').innerHTML = '<i class="bi bi-person"></i> Вход в личный кабинет'
-                    document.getElementById('psw_show').style = 'display:block;'
-                    document.getElementById('tel_show').style = 'display:none;'
-                    document.getElementById('btn_go').style = 'display:none;'
-                    document.getElementById('btn_login').style = 'display:block;'
-                    document.getElementById('lable').innerHTML = 'Введите пароль'
-                    lable.classList.remove('text-danger')
-                    lable.classList.add('text-muted')
-                } else {
-                    document.getElementById('header').innerHTML = '<i class="bi bi-person"></i> Регистрация аккаунта'
-                    document.getElementById('lable').innerHTML = 'Придумайте пароль (не менее 8 сим.)'
-                    lable.classList.remove('text-danger')
-                    lable.classList.add('text-muted')
-                    document.getElementById('psw_show').style = 'display:block;'
-                    document.getElementById('psw_show_confirm').style = 'display:block;'
-                    document.getElementById('tel_show').style = 'display:none;'
-                    document.getElementById('btn_go').style = 'display:none;'
-                    document.getElementById('btn_reg').style = 'display:block;'
+        if((tel.length < 18) || (tel.length > 20)) {
+            var error = 'Неверный формат номера телефона'
+            document.getElementById('tell_mess').innerHTML = error
+            tell_mess.classList.remove('text-muted')
+            tell_mess.classList.add('text-danger')
+        } else {
+            alert(999)
+            $.ajax({
+                url: `/check_tel/${tel}`,
+                method: 'get',
+                dataType: 'html',
+                success: function(data){
+                    document.getElementById('bar').innerHTML = '<i class="bi bi-arrow-left-short"></i> '+tel
+                    document.getElementById('bar').style = 'display:block;'
+                    if(data == 1){
+                        document.getElementById('header').innerHTML = '<i class="bi bi-person"></i> Вход в личный кабинет'
+                        document.getElementById('psw_show').style = 'display:block;'
+                        document.getElementById('tel_show').style = 'display:none;'
+                        document.getElementById('btn_go').style = 'display:none;'
+                        document.getElementById('btn_login').style = 'display:block;'
+                        document.getElementById('lable').innerHTML = 'Введите пароль'
+                        lable.classList.remove('text-danger')
+                        lable.classList.add('text-muted')
+                    } else {
+                        document.getElementById('header').innerHTML = '<i class="bi bi-person"></i> Регистрация аккаунта'
+                        document.getElementById('lable').innerHTML = 'Придумайте пароль (не менее 8 сим.)'
+                        lable.classList.remove('text-danger')
+                        lable.classList.add('text-muted')
+                        document.getElementById('psw_show').style = 'display:block;'
+                        document.getElementById('psw_show_confirm').style = 'display:block;'
+                        document.getElementById('tel_show').style = 'display:none;'
+                        document.getElementById('btn_go').style = 'display:none;'
+                        document.getElementById('btn_reg').style = 'display:block;'
+                    }
                 }
-            }
-        });
+            });
+        }
     } else {
         var error = 'Вы не указали телефон'
         document.getElementById('tell_mess').innerHTML = error

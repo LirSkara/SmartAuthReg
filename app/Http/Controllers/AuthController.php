@@ -21,7 +21,7 @@ class AuthController extends Controller
     public function register_process(Request $request)
     {
         $data = $request->validate([
-            'tel' => ['required', 'string','unique:users,tel'],
+            'tel' => ['required', 'string','unique:users,tel','min:10;'],
             'password' => ['required', 'confirmed']
         ]);
 
